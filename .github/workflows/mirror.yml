@@ -9,6 +9,8 @@ on:
 jobs:
   mirror:
     uses: org013/.github/.github/workflows/mirrors.yml@main
-    secrets: inherit
+    secrets: 
+        CODEBERG_USERNAME: ${{ secrets.CODEBERG_USERNAME }}
+        CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
     with:
       codeberg-repo: https://codeberg.org/Org013/Twooth
