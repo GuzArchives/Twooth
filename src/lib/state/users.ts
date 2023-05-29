@@ -39,7 +39,9 @@ export interface UserProfile {
 		darkMode: boolean
 	}
 	state: {
-		text: string
+		posts: {
+			text: string
+		}[]
 	}
 }
 
@@ -55,7 +57,7 @@ export const usersMap = persistent<UserMap>(
 		twitter: { enabled: true },
 		mastodon: { enabled: true },
 		config: { color: getRandomColor(), darkMode: true },
-		state: { text: '' },
+		state: { posts: [{ text: '' }] },
 	}),
 
 	(map) => JSON.stringify(
@@ -113,7 +115,7 @@ export function createNewUser(): UserProfile {
 			twitter: { enabled: true },
 			mastodon: { enabled: true },
 			config: { color: getUniqueColor(), darkMode: true },
-			state: { text: '' },
+			state: { posts: [{ text: '' }] },
 		});
 		return map;
 	});

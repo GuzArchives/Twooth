@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { text } from './data';
+import { posts } from './data';
 import { currentUser, lastMastodonPost, lastTwitterPost } from '$lib/state/users';
 import qFetch from '$lib/qFetch';
 
