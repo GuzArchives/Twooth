@@ -4,7 +4,7 @@
 	import Textarea from "$lib/components/Textarea.svelte";
 	import PlatformSelection from "./PlatformSelection.svelte";
 	import { posts } from "./data";
-	// import SubmitButton from './SubmitButton.svelte';
+	import SubmitButton from './SubmitButton.svelte';
 	import { writable } from "svelte/store";
 
 	export let postId: number = 0;
@@ -53,7 +53,7 @@
 			{/if}
 			{#if characters > 0}
 				<span transition:fade={{ delay: 100, duration: 200 }}>
-					<!-- <SubmitButton disabled={overLimit} /> -->
+					<SubmitButton disabled={overLimit} />
 				</span>
 			{/if}
 		</section>
