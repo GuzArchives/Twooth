@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { text } from './data';
+import { currentPostId, posts } from './data';
 import { currentUser, lastMastodonPost, lastTwitterPost } from '$lib/state/users';
 import qFetch from '$lib/qFetch';
 
@@ -12,7 +12,7 @@ export async function submitTwooth(): Promise<void> {
 		const { id } = await qFetch<{ id: number }>(
 			'/api/mastodon/post',
 			{
-				query: { instance: user.mastodon.instance?.url, status: get(text) },
+				query: { instance: user.mastodon.instance?.url, statuses: JSON.stringify(get(posts)) },
 				options: {
 					headers: { Authorization: `Bearer ${user.mastodon.token}` },
 					method: 'POST',
@@ -28,7 +28,7 @@ export async function submitTwooth(): Promise<void> {
 		const { id } = await qFetch<{ id: number }>(
 			'/api/twitter/post',
 			{
-				query: { status: get(text) },
+				query: { statuses: JSON.stringify(get(posts)) },
 				options: {
 					headers: { Authorization: `Bearer ${user.twitter.token}` },
 					method: 'POST',
@@ -41,6 +41,9 @@ export async function submitTwooth(): Promise<void> {
 		lastTwitterPost.set(undefined);
 	}
 
-	if (success[0] || success[1]) text.set('');
+	if (success[0] || success[1]) {
+		posts.set([{ text: '' }]);
+		currentPostId.set(0);
+	};
 
 }
