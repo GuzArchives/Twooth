@@ -10,8 +10,6 @@ export const POST = (async ({ request, url }): Promise<Response> => {
 
 	if (!token || !instanceUrl || !statuses) throw error(400);
 
-	console.log(statuses);
-
 	const postReq = await postStatus(statuses[0].text, instanceUrl, token);
 
 	if (statuses.length > 1) {
