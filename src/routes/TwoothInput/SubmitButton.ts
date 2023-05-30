@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { posts } from './data';
+import { currentPostId, posts } from './data';
 import { currentUser, lastMastodonPost, lastTwitterPost } from '$lib/state/users';
 import qFetch from '$lib/qFetch';
 
@@ -41,6 +41,9 @@ export async function submitTwooth(): Promise<void> {
 		lastTwitterPost.set(undefined);
 	}
 
-	if (success[0] || success[1]) posts.set([{ text: '' }]);
+	if (success[0] || success[1]) {
+		posts.set([{ text: '' }]);
+		currentPostId.set(0);
+	};
 
 }
